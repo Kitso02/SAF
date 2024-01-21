@@ -1,0 +1,301 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.2">
+    <title>Student Assistance Form</title>
+    <title>Sol Plaatje University</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #ff5100;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select,
+        input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #e40c0c;
+            border-radius: 4px;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #b30000;
+        }
+
+        small {
+            display: block;
+            margin-top: 5px;
+            color: #888;
+        }
+        #university-logo {
+            max-width: 100%; /* Adjust the max-width as needed */
+            height: auto;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #university-name {
+            color: #ff2600;
+            font-size: 24px;
+            margin-bottom: 10px;
+
+        }
+        
+       </style>
+      </head>
+            <!---checking if the student is funded or not-->
+    </style>
+    <script>
+        function handleFormSubmit() {
+            var fundedValue = document.querySelector('input[name="nsfas"]:checked').value;
+    
+            if (fundedValue === 'no') {
+                alert("Thank you for submitting the form. Please set an appointment with the dean regarding funding.");
+            } else {
+                alert("Thank you for submitting the form. Your information has been received.");
+            }
+        }
+    </script>
+    
+      <!-- The functionality where a student can select only two out of three options -->
+
+    </style>
+    <script>
+        function handleCheckboxSelection(checkbox) {
+            var checkboxes = document.querySelectorAll('input[name="assistance[]"]');
+            var selectedCheckboxes = Array.from(checkboxes).filter(cb => cb.checked);
+
+            if (selectedCheckboxes.length > 2) {
+                alert("Please select only two assistance options.");
+                checkbox.checked = false;
+            }
+        }
+    </script>
+</head>
+<body>
+
+
+       <!-- University Logo and Name -->
+    <div id="university-logo">
+      <img src="C:\Users\Admin\Downloads\Buntu\download.jpeg" alt="Sol Plaatje University Logo">
+    </div>
+</head>
+<body>
+<div id="university-name">
+    Sol Plaatje University
+</div>
+
+<body>
+
+    <h2>Student Assistance Form</h2>
+
+    <form onsubmit="handleFormSubmit(); return false;" action="http://localhost:3003/submit-form" method="post">
+
+
+        <!-- Student Information -->
+       <div>
+        <label for="SURNAME">SURNAME:</label>
+        <input type="text" id="SURNAME" name="SURNAME" required>
+       </div>
+
+       <div>
+        <label for="FIRSTNAME">FIRST NAME:</label>
+        <input type="text" id="FIRST NAME" name="FIRSTNAME" required>
+       </div>
+
+          
+         <!-- Add a student ID field to your form -->
+<div>
+    <label for="STUDENT NUMBER">STUDENT NUMBER:</label>
+    <input type="text" id="STUDENT NUMBER" name="STUDENT NAME" required>
+</div>
+
+<!-- function to send the student number to the server -->
+<script>
+    function handleFormSubmit() {
+        var studentNumber = document.getElementById('student number').value;
+
+        // Send the student number to the server
+        fetch('http://localhost:3003/submit-form', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `student number=${studentNumber}`,
+        })
+        .then(response => response.text())
+        .then(message => {
+            alert(message);
+        });
+    }
+</script>
+
+
+          <!-- Gender -->
+          <div>
+          <label>GENDER:</label>
+          <label><input type="radio" name="gender" value="male"> Male</label>
+          <label><input type="radio" name="gender" value="female"> Female</label>
+          <label><input type="radio" name="gender" value="other"> Other</label>
+        </div>
+
+
+          <!-- Race -->
+          <div>
+          <label for="race">RACE:</label>
+          <select id="race" name="race">
+              <option value="asian">Asian</option>
+              <option value="black">Black</option>
+              <option value="white">White</option>
+              <option value="hispanic">Hispanic</option>
+              <option value="other">Other</option>
+          </select>
+          </div>
+
+
+          <!-- Age -->
+          <div>
+          <label for="age">AGE:</label>
+          <input type="number" id="age" name="age" required>
+        </div>
+
+         <!-- Funded or Not -->
+        <div>
+            <label>Have you been funded?</label>
+            <label><input type="radio" name="funded" value="yes"> Yes</label>
+            <label><input type="radio" name="funded" value="no"> No</label>
+        </div>
+
+
+        <!-- Assistance Options -->
+        <h3>Select up to 2 assistance options:</h3>
+           
+        <!-- Checkbox Group for Assistance Options -->
+         <!-- Food Nutrition -->
+          
+        <div>
+            <h3>1.FOOD NUTRITION</h3>
+            </div>
+
+            <div>
+                <label>
+                    <input type="checkbox" name="assistance[]" value="Food Nutrition" onclick="handleCheckboxSelection(this)">
+                    FOOD NUTRITION
+                </label>
+            </div>
+
+             <!-- Stay on or off-campus -->
+            <div>
+            <label>WHERE DO YOU STAY?</label>
+            <label><input type="radio" name="stay" value="on_campus"> On Campus</label>
+            <label><input type="radio" name="stay" value="off_campus"> Off Campus</label>
+             </div>
+
+            <!-- If off-campus, accredited or non-accredited -->
+            <div>
+                <label>IF OFF-CAMPUS, IS IT ACCREDITED OR NON-ACCREDITED?</label>
+                <label><input type="radio" name="accredited" value="accredited"> Accredited</label>
+                <label><input type="radio" name="accredited" value="non_accredited"> Non-accredited</label>
+            </div>
+
+            <!-- Faculty of study -->
+             
+            <div>
+                <label for="faculty">FACULTY OF STUDY:</label>
+                <select id="faculty" name="faculty">
+                    <option value="NAS">Natural Applied science</option>
+                    <option value="EMS">Economic and Management Science</option>
+                    <option value="Education">Education</option>
+                    <option value="Humanities">Humanities</option>
+                </select> 
+                   </div> 
+
+               <!-- Level of study -->
+             
+        <div> 
+            <label for="Level of study">LEVEL OF STUDY:</label>
+            <select id="level of study" name="level of study">
+
+                 <option value="First year">First year</option>
+                  <option value="Second year">Second year</option>
+                   <option value="Third year">Third year</option>
+                  <option value="Fourth year">Fourth year</option>
+                  <option value="Postgraduate">Postgraduate</option>
+             </select>
+        </div>
+
+            <!-- Need financial assistance -->
+            <div>
+                <label>DO YOU NEED FINANCIAL ASSISTANCE?</label>
+                <label><input type="radio" name="need_financial_assistance" value="yes"> Yes</label>
+                <label><input type="radio" name="need_financial_assistance" value="no"> No</label>
+            </div>
+        </div>
+        <div>
+           <!-- Two Meals a Day -->
+        <div>
+            <h3>2.TWO MEALS A DAY</h3>
+            <label>
+                <input type="checkbox" name="assistance[]" value="Two Meals a Day" onclick="handleCheckboxSelection(this)">
+                TWO MEALS A DAY
+            </label>
+        </div>
+
+        <!-- Hygiene Pack -->
+        <div>
+            <h3>3.HYGIENE PACK</h3>
+            <label>
+                <input type="checkbox" name="assistance[]" value="Hygiene Pack" onclick="handleCheckboxSelection(this)">
+                HYGIENE PACK
+            </label>
+        </div>
+
+    </style>
+   
+
+
+        <!-- Submit Button -->
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+
+</body>
+</html>
